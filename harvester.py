@@ -1,20 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Автономный сборщик данных RubUp. Работает в фоне БЕЗ браузера:
-  - /api/feed          → чужие игры в реальном времени (только новые по id)
-  - /api/me            → RTP-окна бота + онлайн (каждые 30 с)
-  - /api/fair          → аудит бота + раунды краша с seed'ами (каждые 60 с)
-  - /api/fair_history  → полная история игр всех игроков (бэкфилл при старте)
-Только чтение. Ничего не ставит, не крутит, не меняет.
-
-Файлы:
-  init_data.txt — твой X-Init-Data (обновляй, если сервер скажет, что устарел)
-  base_url.txt  — адрес туннеля (обновляй, если бот перезапустили)
-База: live.db (SQLite)
-
-Запуск: python harvester.py   (Ctrl+C — стоп)
-"""
-
 import io
 import json
 import os
@@ -52,7 +35,6 @@ def db():
 
 
 def read_conf():
-    # на сервере (Render и т.п.) ключи берём из переменных окружения, локально — из файлов
     base = os.environ.get("BASE_URL") or (HERE / "base_url.txt").read_text(encoding="utf-8").strip()
     init = os.environ.get("INIT_DATA") or (HERE / "init_data.txt").read_text(encoding="utf-8").strip()
     return base.strip().rstrip("/"), init.strip()
@@ -150,7 +132,6 @@ def main():
     conn = db()
     state = {}
 
-    # где остановился в прошлый раз
     row = conn.execute("SELECT MAX(id) FROM feed_items").fetchone()
     state["feed_after"] = row[0] or 0
     log(conn, "start", f"feed_after={state['feed_after']}")
@@ -160,7 +141,7 @@ def main():
     t_me, t_fair, t_refill = 0, 0, time.time() + 1800
     while True:
         try:
-            base, init = read_conf()  # мог обновиться
+            base, init = read_conf()
         except Exception:
             pass
         now = time.time()
@@ -174,7 +155,7 @@ def main():
             if now - t_fair >= 60:
                 poll_fair(conn, base, init)
                 t_fair = now
-            if now > t_refill:  # раз в полчаса добираем новую историю
+            if now > t_refill:
                 backfill_history(conn, base, init, max_pages=200)
                 t_refill = time.time() + 1800
         except urllib.error.HTTPError as e:
