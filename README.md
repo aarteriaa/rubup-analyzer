@@ -1,6 +1,6 @@
 # RubUp Analyzer
 
-**Passive RTP / fairness analytics for third-party casino bots built on [StaticGram](https://staticgram.top) — a standalone MTProto messenger network. Case study: `@RubUpBot`.**
+**Passive RTP / fairness analytics for third-party casino bots built on [StaticGram](https://t.me/staticgrams) — a standalone MTProto messenger network. Case study: `@RubUpBot`.**
 
 [English](#english) · [Русский](#русский)
 
@@ -23,6 +23,8 @@ Personally for me, `@RubUp` is a casino bot made in StaticGram (a standalone
 MTProto network), and this repo documents how to audit such a bot with nothing
 but its own client-side API.
 
+> 📰 Official StaticGram news channel (in Telegram): [@StaticGrams](https://t.me/staticgrams)
+
 **Important framing:** this is *my own* analytics of *my own* play sessions. The
 tool never places bets, never automates gameplay, and never sends anything to the
 bot's API beyond read-only POST requests carrying my own session data. It is a
@@ -30,6 +32,8 @@ consumer-transparency experiment: when a casino exposes its own RTP telemetry,
 you can simply watch it.
 
 ### Why "case study"
+
+> 📰 Official StaticGram news channel (in Telegram): [@StaticGrams](https://t.me/staticgrams)
 
 Most Telegram-like casino bots are closed boxes. RubUp (as of Oct 2026) exposes:
 
@@ -132,6 +136,8 @@ that exposes a client-side HTTP API:
 MTProto-сети), и этот репозиторий — пример того, как можно проверять такие
 боты, используя только их же клиентский API.
 
+> 📰 Официальный новостной канал StaticGram (в Telegram): [@StaticGrams](https://t.me/staticgrams)
+
 **Важно:** это личная аналитика моих собственных сессий. Инструмент не ставит
 ставки, не автоматизирует игру и не отправляет в API ничего, кроме
 read-only POST-запросов с моими собственными сессионными данными. Это
@@ -139,6 +145,8 @@ read-only POST-запросов с моими собственными сесс�
 её можно просто наблюдать.
 
 ### Почему «пример проверки»
+
+> 📰 Официальный новостной канал StaticGram (в Telegram): [@StaticGrams](https://t.me/staticgrams)
 
 Обычно такие боты — закрытый ящик. RubUp (на октябрь 2026) раскрывает:
 
